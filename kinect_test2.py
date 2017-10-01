@@ -7,6 +7,8 @@ from PIL import Image
 import time
 import argparse
 import subprocess
+import os
+
 
 argparser = argparse.ArgumentParser()
 argparser.add_argument('-e', '--email', action='store_true')
@@ -49,6 +51,8 @@ while 1:
                 last_num_faces = len(faces)
                 image = Image.fromarray(rgb, now)
                 formatted_time = time.strftime('%Y-%m-%d-%H:%M:%S',time.gmtime(now))
+                if not os.path.isdir('http/gallery'):
+                    os.mkdir('http/gallery')
                 image_name = 'http/gallery/{0}.png'.format(formatted_time)
                 image.save(image_name)
 
