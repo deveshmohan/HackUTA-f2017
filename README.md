@@ -3,7 +3,8 @@
 Visual motion tracking for disaster relief efforts. The KinectCam has 2 purposes: 1. security tracking for supply rooms, and, 2. using face recognition to detect persons in a disaster area for rescuing misssions
 
 Dependencies: gcc, python 2.7, opencv, libfreenect, libhdf5, ffmpeg, apache web server, python2-pillow
-Web client includes code from (hls.js)[https://github.com/video-dev/hls.js]
+
+Web client includes code from hls.js (https://github.com/video-dev/hls.js)
 
 How to install
 --
@@ -20,3 +21,4 @@ How to run
 * Connect a Kinect device to usb
 * Run `run.sh` to start the video transcoding
 
+Please note that this project will most likely fail to install/run on non Unix-like systems.

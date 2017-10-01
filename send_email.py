@@ -31,6 +31,7 @@ mail['To'] = to_addr
 
 with open(image, 'rb') as image_file:
     attachment = MIMEImage(image_file.read())
+    attachment.add_header("Content-disposition", "attachment", filename=image)
     mail.attach(attachment)
 
 print smtp_host

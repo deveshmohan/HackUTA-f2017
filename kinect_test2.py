@@ -20,6 +20,7 @@ in_file = args.in_file
 last_image = 0;
 last_num_faces = 0
 firstFrame = None
+DEVNULL = open('/dev/null', 'wb')
 """
 Grabs a depth map from the Kinect sensor and creates an image from it.
 """
@@ -79,4 +80,4 @@ while 1:
                 image_name = 'http/gallery/{0}.png'.format(formatted_time)
                 image.save(image_name)
 
-                subprocess.Popen(["python2", "send_email.py", str(len(faces)), image_name, formatted_time], stdout=subprocess.DEVNULL);
+                subprocess.Popen(["python2", "send_email.py", str(len(faces)), image_name, formatted_time], stdout=DEVNULL);
