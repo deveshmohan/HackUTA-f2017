@@ -8,7 +8,8 @@
 	</head>
 	<body>
 		<script type="text/javascript">
-			document.addEventListener("onload", function(){
+			window.addEventListener("load", function(){
+				console.log("loaded");
 			var video = document.getElementById('kinect-stream');
 			var hls = new Hls();
 			hls.loadSource('stream/segments.m3u8');
@@ -23,8 +24,8 @@
 			window.hls = hls;
 			});
 		</script>
-		<video id="kinect-stream"></video>
-			<noscript>You must enable javascript in order to view this page</noscript>
+		<video id="kinect-stream" autoplay></video>
+		<noscript>You must enable javascript in order to view this page</noscript>
 	</body>
 </html>
 				
