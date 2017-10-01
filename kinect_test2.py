@@ -30,31 +30,21 @@
 import freenect
 import cv2
 import numpy as np
+import select
+import sys
+
 faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+in_file = open(sys.argv[1]) if len(sys.argv) > 1 else sys.stdin
 """
 Grabs a depth map from the Kinect sensor and creates an image from it.
 """
-def getDepthMap():	
-	depth, timestamp = freenect.sync_get_depth()
- 
-	np.clip(depth, 0, 2**10 - 1, depth)
-	depth >>= 2
-	depth = depth.astype(np.uint8)
- 
-	return depth
-def getRGB():	
-	rgb, timestamp = freenect.sync_get_video()
-	#rgb = (rgb * 258).round().astype(np.uint8)
- 	rgb = rgb.astype(np.uint8)
-	return rgb
+
 while 1:
-	
-#	eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
-	depth = getDepthMap()
- 	rgb = getRGB()
+	select.select([in_file], [], [])
+        rgb = np.fromfile(in_file, dtype=np.uint8, count=640*480*3)
+        rgb.shape = (480, 640, 3)
+        # sys.stderr.write(repr(rgb))
 	gray = cv2.cvtColor(rgb, cv2.COLOR_BGR2GRAY)
-	#print gray
-#	faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
 	faces = faceCascade.detectMultiScale(
     		gray,
@@ -63,13 +53,12 @@ while 1:
     		minSize=(30, 30),
     		flags = cv2.CASCADE_SCALE_IMAGE
 		)
-	print "Found {0} faces!".format(len(faces))
+	# print "Found {0} faces!".format(len(faces))
 
 	# Draw a rectangle around the faces
 	for (x, y, w, h) in faces:
     		cv2.rectangle(rgb, (x, y), (x+w, y+h), (0, 255, 0), 2)
-	cv2.imshow("Faces found" ,rgb)
-	cv2.waitKey(1)
+        rgb.tofile(sys.stdout)
 
 #	for (x,y,w,h) in faces:
 #    		img = cv2.rectangle(rgb,(x,y),(x+w,y+h),(255,0,0),2)
