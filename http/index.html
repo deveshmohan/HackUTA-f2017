@@ -1,14 +1,29 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Test</title>
 		<!-- <script src="dash.all.min.js"></script> -->
 		<script src="hls.js"></script>
+		<meta charset="utf-8"></meta>
 	</head>
 	<body>
 		<script type="text/javascript">
-				var video = document.getEl
+			document.addEventListener("onload", function(){
+			var video = document.getElementById('kinect-stream');
+			var hls = new Hls();
+			hls.loadSource('stream/segments.m3u8');
+			hls.attachMedia(video);
+			hls.on(Hls.Events.MANIFEST_PARSED,function(evt, data) {
+				video.play();
+			});
+			hls.on(Hls.Events.ERROR, function (evt, data) {
+				console.log(evt);
+				console.log(data);
+			});
+			window.hls = hls;
+			});
 		</script>
-		<video id="kinect-stream">
+		<video id="kinect-stream"></video>
 			<noscript>You must enable javascript in order to view this page</noscript>
 	</body>
 </html>
