@@ -21,9 +21,16 @@
 	<!-- <script src="dash.all.min.js"></script> -->
 		<script src="hls.js"></script>
     <style>
+	# video {
+		text-align: center;
+		margin-bottom: 30px;
+	}
 	# kinect-stream {
+		display: block;
 		margin: auto;
-		border: 2px black;
+	}
+	# main {
+		padding-top: 30px;
 	}
     </style>
   </head>
@@ -42,7 +49,7 @@
 	<div id="AddInfo">
 	<article class="style5">
 	<p>Visual motion tracking for disaster relief efforts. The KinectCam has 2 purposes: 1. security tracking for supply rooms, and, 2. using face recognition to detect persons in a disaster area for rescuing misssions</div></p></article></div>
-      <div id="video">
+      <div id="video" style="margin-bottom: 30px">
 		<script type="text/javascript">
 			window.addEventListener("load", function(){
 				console.log("loaded");
@@ -60,7 +67,7 @@
 			window.hls = hls;
 			});
 		</script>
-		<video id="kinect-stream" autoplay></video>
+		<video id="kinect-stream" autoplay loop width="640" height="480" style="display: block; margin: auto"></video>
 		<noscript>You must enable javascript in order to view this page</noscript>
 	</div>
       <div id="main">

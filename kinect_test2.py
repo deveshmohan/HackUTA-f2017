@@ -79,4 +79,4 @@ while 1:
                 image_name = 'http/gallery/{0}.png'.format(formatted_time)
                 image.save(image_name)
 
-                subprocess.Popen(["python2", "send_email.py", str(len(faces)), image_name, formatted_time]);
+                subprocess.Popen(["python2", "send_email.py", str(len(faces)), image_name, formatted_time], stdout=subprocess.DEVNULL);
