@@ -1,0 +1,129 @@
+<html><head>
+    <title>KinectCam</title>
+    <link rel="SHORTCUT ICON" href="images/kinect_resize.svg">
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="kinect_resize.jpg">
+    <link rel="apple-touch-icon" sizes="72x72" href="kinect_resize.jpg">
+    <link rel="apple-touch-icon" sizes="114x114" href="kinect_resize.jpg">
+    <link rel="apple-touch-icon" sizes="144x144" href="kinect_resize.jpg">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--[if lte IE 8]>
+      <script src="assets/js/ie/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!--[if lte IE 9]>
+      <link rel="stylesheet" href="assets/css/ie9.css" />
+    <![endif]-->
+    <!--[if lte IE 8]>
+      <link rel="stylesheet" href="assets/css/ie8.css" />
+    <![endif]-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<!-- <script src="dash.all.min.js"></script> -->
+		<script src="hls.js"></script>
+  </head>
+  <body>
+    <!-- Wrapper -->
+    <div id="wrapper">
+      <!-- Header -->
+      <header id="header">
+        <div class="inner">
+          <!-- Logo -->
+          <a href="index.html" class="logo"> <span class="symbol"><img src="images/kinect_resize.svg" alt=""></span><span class="title">KinectCam</span> </a>
+        
+        </div>
+      </header>
+      <div id="video">
+		<script type="text/javascript">
+			window.addEventListener("load", function(){
+				console.log("loaded");
+			var video = document.getElementById('kinect-stream');
+			var hls = new Hls();
+			hls.loadSource('stream/segments.m3u8');
+			hls.attachMedia(video);
+			hls.on(Hls.Events.MANIFEST_PARSED,function(evt, data) {
+				video.play();
+			});
+			hls.on(Hls.Events.ERROR, function (evt, data) {
+				console.log(evt);
+				console.log(data);
+			});
+			window.hls = hls;
+			});
+		</script>
+		<video id="kinect-stream" autoplay></video>
+		<noscript>You must enable javascript in order to view this page</noscript>
+	</div>
+      <div id="main">
+        <div class="inner">
+          
+          <section class="tiles">
+            <article class="style1">
+              <span class="image">
+                <img src="images/pic01.jpg" alt="">
+              </span>
+              <a>
+              <h2>Live Video Stream</h2>
+              <div class="content">
+                <p>A live video stream for disaster relief goods monitoring</p>
+              </div>
+            </a>
+            </article>
+            <article class="style2">
+              <span class="image">
+                <img src="images/pic02.jpg" alt="">
+              </span>
+              <a>
+              <h2>Motion Tracking</h2>
+              <div class="content">
+                <p>Tracking changes in the environment, for smarter monitoring</p>
+              </div>
+            </a>
+            </article>
+            <article class="style3">
+              <span class="image">
+                <img src="images/pic03.jpg" alt="">
+              </span>
+              <a>
+              <h2>Alert System</h2>
+              <div class="content">
+                <p>Phone alerts for immediate tracking</p>
+              </div>
+            </a>
+            </article>
+          </section>
+        
+          <!--This is raided information-->
+        </div>
+      </div>
+      <!-- Footer -->
+      <footer id="footer">
+        <div class="inner">
+          <section>
+            <h1>Shelterize</h1>
+          </section>
+          <section>
+            <h2>Follow Us</h2>
+            <ul class="icons">
+              <li>
+                <a href="https://github.com/deveshmohan/HackUTA-f2017/" class="icon style2 fa-github"><span class="label">GitHub</span></a>
+              </li>
+            </ul>
+          </section>
+          <ul class="copyright">
+            <li>KinectCam. All rights reserved</li>
+            <li>Devesh Mohan, Ryan Dellenbaugh</li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <!--[if lte IE 8]>
+      <script src="assets/js/ie/respond.min.js"></script>
+    <![endif]-->
+    <script src="assets/js/main.js"></script>
+  
+
+</body></html>

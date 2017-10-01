@@ -1,0 +1,9 @@
+[24-Sep-2017 10:09:51 UTC] PHP Notice:  Undefined index: lat in /home/woodforest/public_html/SHELTERIZE.net/uploadhelpme.php on line 17
+[24-Sep-2017 10:09:51 UTC] PHP Notice:  Undefined index: lng in /home/woodforest/public_html/SHELTERIZE.net/uploadhelpme.php on line 18
+[24-Sep-2017 10:35:37 UTC] PHP Notice:  Undefined index: vnotes in /home/woodforest/public_html/SHELTERIZE.net/uploadofferhelp.php on line 17
+[24-Sep-2017 10:36:34 UTC] PHP Notice:  Undefined index: vnotes in /home/woodforest/public_html/SHELTERIZE.net/uploadofferhelp.php on line 17
+[24-Sep-2017 11:38:36 UTC] PHP Notice:  Undefined index: vloc in /home/woodforest/public_html/SHELTERIZE.net/safe.php on line 148
+[24-Sep-2017 12:21:04 UTC] PHP Notice:  Undefined index: lat in /home/woodforest/public_html/SHELTERIZE.net/uploadhelpme.php on line 17
+[24-Sep-2017 12:21:04 UTC] PHP Notice:  Undefined index: lng in /home/woodforest/public_html/SHELTERIZE.net/uploadhelpme.php on line 18
+[24-Sep-2017 12:36:17 UTC] PHP Notice:  Undefined index: lat in /home/woodforest/public_html/SHELTERIZE.net/uploadhelpme.php on line 17
+[24-Sep-2017 12:36:17 UTC] PHP Notice:  Undefined index: lng in /home/woodforest/public_html/SHELTERIZE.net/uploadhelpme.php on line 18
