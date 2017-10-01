@@ -36,11 +36,13 @@ with open(image, 'rb') as image_file:
 print smtp_host
 print smtp_port
 smtp = smtplib.SMTP(smtp_host, smtp_port)
+if cfg.has_section('tls') and cfg.getboolean('tls', 'use_tls'):
+    smtp.starttls()
 
 if cfg.has_section('login'):
     username = cfg.get('login', 'username')
     password = cfg.get('login', 'password')
     smtp.login(username, password)
 
-smtp.sendmail(from_addr, to_addr, mail)
+smtp.sendmail(from_addr, to_addr, mail.as_string())
 smtp.quit()
