@@ -11,7 +11,7 @@
 			window.addEventListener("load", function(){
 				console.log("loaded");
 			var video = document.getElementById('kinect-stream');
-			var hls = new Hls();
+			var hls = new Hls({liveMaxLatencyDurationCount: 6, maxBufferLength: 15});
 			hls.loadSource('stream/segments.m3u8');
 			hls.attachMedia(video);
 			hls.on(Hls.Events.MANIFEST_PARSED,function(evt, data) {

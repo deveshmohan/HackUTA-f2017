@@ -1,40 +1,22 @@
-#import cv2
-#import freenect
-
-#capture = cv2.VideoCapture(freenect.sync_get_video())
-#capture.set(cv2.CAP_OPENNI_IMAGE_GENERATOR_OUTPUT_MODE, cv2.CAP_OPENNI_VGA_30HZ)
-
-#print capture.get(cv2.CAP_PROP_OPENNI_REGISTRATION)
-
-#while True:
-#    if not capture.grab():
-#        print "Unable to Grab Frames from camera"
-#        break
-#    okay1, depth_map = capture.retrieve(cv2.CAP_OPENNI_DEPTH_MAP)
-#    if not okay1:
-#        print "Unable to Retrieve Disparity Map from camera"
-#        break
-#    okay2, gray_image = capture.retrieve(cv2.CAP_OPENNI_GRAY_IMAGE)
-#    if not okay2:
-#        print "Unable to retrieve Gray Image from device"
-#        break
-#    cv2.imshow("depth camera", depth_map)
-#    cv2.imshow("rgb camera", gray_image)
-#    if cv2.waitKey(10) == 27:
-#        break
-
-#freenect.runloop(
-#cv2.destroyAllWindows()
-#capture.release()
-
 import freenect
 import cv2
 import numpy as np
 import select
 import sys
+from PIL import Image
+import time
+import argparse
+import subprocess
+
+argparser = argparse.ArgumentParser()
+argparser.add_argument('-e', '--email', action='store_true')
+argparser.add_argument('in_file', type=argparse.FileType("rb"), default=sys.stdin, nargs='?');
+args = argparser.parse_args();
 
 faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-in_file = open(sys.argv[1]) if len(sys.argv) > 1 else sys.stdin
+in_file = args.in_file
+last_image = 0;
+last_num_faces = 0
 """
 Grabs a depth map from the Kinect sensor and creates an image from it.
 """
@@ -60,22 +42,14 @@ while 1:
     		cv2.rectangle(rgb, (x, y), (x+w, y+h), (0, 255, 0), 2)
         rgb.tofile(sys.stdout)
 
-#	for (x,y,w,h) in faces:
-#    		img = cv2.rectangle(rgb,(x,y),(x+w,y+h),(255,0,0),2)
-#    		roi_gray = gray[y:y+h, x:x+w]
-#    		roi_color = img[y:y+h, x:x+w]
-#    		eyes = eye_cascade.detectMultiScale(roi_gray)
-#    		for (ex,ey,ew,eh) in eyes:
-#        		cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
-#        # quit program when 'esc' key is pressed
-#        k = cv2.waitKey(5) & 0xFF
-#        if k == 27:
-#            break
-#    	cv2.destroyAllWindows()
+        if faces:
+            now = time.time();
+            if now >= last_image + 60 or len(faces) > last_num_faces:
+                last_image = now
+                last_num_faces = len(faces)
+                image = Image.fromarray(rgb, now)
+                formatted_time = time.strftime('%Y-%m-%d-%H:%M:%S',time.gmtime(now))
+                image_name = 'http/gallery/{0}.png'.format(formatted_time)
+                image.save(image_name)
 
-#	print faces
-#	blur = cv2.GaussianBlur(depth, (5, 5), 0)
-# 	blur2 = cv2.GaussianBlur(rgb, (5, 5), 0)
-#	cv2.imshow('image', faces)
-#	cv2.imshow('image2', rgb)
-#	cv2.waitKey(10)
+                subprocess.Popen(["python2", "send_email.py", str(num_faces), image_name, formatted_time]);
